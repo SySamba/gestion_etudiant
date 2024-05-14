@@ -1,29 +1,27 @@
 pipeline {
     agent any  
     stages {
-        stage("test") {
-            steps {
-                echo "hello world"
-            }
-        }
-        stage("build") {
+        stage("Terraform Init") {
             steps {
                 script {
-                    bat 'docker --version'
-                   // bat "docker-compose up -d --build"
+                    // Initialisation de Terraform
+                    sh 'terraform init'
                 }
             }
         }
-        stage("deploy to Kubernetes") {
+        stage("Terraform Plan") {
             steps {
-                withCredentials([file(credentialsId: 'test11', variable: 'KUBECONFIG')]) {
-                    script {
-                        // Déployer sur Kubernetes
-                        bat "kubectl apply -f kubernetes/bd-deployer.yaml --kubeconfig=${KUBECONFIG} --validate=false"
-                        bat "kubectl apply -f kubernetes/bd-service.yaml --kubeconfig=${KUBECONFIG} --validate=false"
-                        bat "kubectl apply -f kubernetes/php-deployer.yaml --kubeconfig=${KUBECONFIG} --validate=false"
-                        bat "kubectl apply -f kubernetes/php-service.yaml --kubeconfig=${KUBECONFIG} --validate=false"
-                    }
+                script {
+                    // Planification des modifications Terraform
+                    sh 'terraform plan'
+                }
+            }
+        }
+        stage("Terraform Apply") {
+            steps {
+                script {
+                    // Application des modifications Terraform (déploiement)
+                    sh 'terraform apply --auto-approve'
                 }
             }
         }
