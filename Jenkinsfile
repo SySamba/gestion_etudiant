@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     // Changer de répertoire vers le répertoire contenant les fichiers Terraform
-                    bat 'cd /D C:\\chemin\\vers\\votre\\dossier\\terraform'
+                    bat 'cd C:\\xampp\\htdocs\\Gestion_Etudiant\\terra'
                     // Initialisation de Terraform
                     bat 'terraform init'
                 }
@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Changer de répertoire vers le répertoire contenant les fichiers Terraform
-                    bat 'cd C:\xampp\htdocs\Gestion_Etudiant\terra'
+                    bat 'cd C:\\xampp\\htdocs\\Gestion_Etudiant\\terra'
                     // Planification des modifications Terraform
                     bat 'terraform plan'
                 }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     // Changer de répertoire vers le répertoire contenant les fichiers Terraform
-                    bat 'cd C:\xampp\htdocs\Gestion_Etudiant\terra'
+                    bat 'cd C:\\xampp\\htdocs\\Gestion_Etudiant\\terra'
                     // Application des modifications Terraform (déploiement)
                     bat 'terraform apply --auto-approve'
                 }
