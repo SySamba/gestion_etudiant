@@ -1,38 +1,38 @@
 pipeline {
-    agent any
     environment {
-        KUBECONFIG = "C:\\Users\\HP\\.kube\\config"
+        KUBECONFIG = "C:\\Users\\HP\\.kube\config"
         TERRA_DIR = "C:\\xampp\\htdocs\\Gestion_Etudiant\\terra"
     }
+
     stages {
-        stage('Initialization') {
+        stage ('initilization') {
             steps {
                 script {
                     bat 'terraform --version'
                 }
             }
         }
-        
-        stage("Terraform Init") {
+
+        stage("Terraform init") {
             steps {
                 script {
                     bat "cd %TERRA_DIR% && terraform init"
                 }
             }
         }
-        
+
         stage("Terraform Plan") {
             steps {
                 script {
-                    bat "cd %TERRA_DIR% && terraform plan"
+                    bat "cd %TERRA_DIR && terraform plan"
                 }
             }
         }
-        
+
         stage("Terraform Apply") {
             steps {
                 script {
-                    bat "cd %TERRA_DIR% && terraform apply --auto-approve"
+                    bat "cd %TERRA_DIR && terraform apply --auto-approve"
                 }
             }
         }
@@ -40,21 +40,21 @@ pipeline {
     post {
         always {
             script {
-                bat "cd %TERRA_DIR% && terraform destroy --auto-approve"
+                bat "cd %TERRA_DIR && terraform destroy --auto-approve"
             }
         }
         success {
             emailext (
-                subject: "Notification de build Jenkins - Succès",
-                body: "Le build de votre pipeline Jenkins s'est terminé avec succès.",
-                to: "sambasy837@gmail.com"
+                subject: "notifi succes jenkins",
+                body : "le build de votre pipeline Jenkins passe avec succes",
+                to :"sambasy837@gmail.com"
             )
         }
         failure {
             emailext (
-                subject: "Notification de build Jenkins - Échec",
-                body: "Le build de votre pipeline Jenkins a échoué.",
-                to: "sambasy837@email.com"
+                subject : "notifi echec jenkins",
+                body : "echec",
+                to :"sambasy837@gmail.com"
             )
         }
     }
