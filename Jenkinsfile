@@ -4,9 +4,7 @@ pipeline {
         stage("Terraform Init") {
             steps {
                 script {
-                    // Changer de répertoire vers le répertoire contenant les fichiers Terraform
                     bat 'cd C:\\xampp\\htdocs\\Gestion_Etudiant\\terra'
-                    // Initialisation de Terraform
                     bat 'terraform init'
                 }
             }
@@ -14,9 +12,7 @@ pipeline {
         stage("Terraform Plan") {
             steps {
                 script {
-                    // Changer de répertoire vers le répertoire contenant les fichiers Terraform
                     bat 'cd C:\\xampp\\htdocs\\Gestion_Etudiant\\terra'
-                    // Planification des modifications Terraform
                     bat 'terraform plan'
                 }
             }
@@ -24,9 +20,7 @@ pipeline {
         stage("Terraform Apply") {
             steps {
                 script {
-                    // Changer de répertoire vers le répertoire contenant les fichiers Terraform
                     bat 'cd C:\\xampp\\htdocs\\Gestion_Etudiant\\terra'
-                    // Application des modifications Terraform (déploiement)
                     bat 'terraform apply --auto-approve'
                 }
             }
