@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Web.Dockerfile
     ports:
-      - 8086:80
+      - 8087:80
     depends_on:
       - mysql
 
