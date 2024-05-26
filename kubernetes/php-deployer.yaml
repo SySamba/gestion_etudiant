@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: php
-        image: papasy/projetphp1
+        image: papasy/projet1php
         ports:
         - containerPort: 80

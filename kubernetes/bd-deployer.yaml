@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: db
-        image: papasy/projetbd1
+        image: papasy/projet1bd
         ports:
         - containerPort: 3306
         env:
