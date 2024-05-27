@@ -10,11 +10,11 @@ spec:
   template:
     metadata:
       labels:
-        app: 
+        app: db
     spec:
       containers:
       - name: db
-        image: papasy/projet1bd
+        image: papasy/projet1bd1
         ports:
         - containerPort: 3306
         env:
