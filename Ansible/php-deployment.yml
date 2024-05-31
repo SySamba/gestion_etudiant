@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Déploiement PHP
+      community.kubernetes.k8s:
+        kubeconfig: "C:\\Users\\HP\\.kube\\config"
+        namespace: default
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: php-deployment
+          spec:
+            replicas: 2
+            selector:
+              matchLabels:
+                app: php
+            template:
+              metadata:
+                labels:
+                  app: php
+              spec:
+                containers:
+                  - name: php
+                    image: papasy/projetphp1
+                    ports:
+                      - containerPort: 80

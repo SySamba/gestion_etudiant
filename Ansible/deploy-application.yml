@@ -1,0 +1,15 @@
+- name: Deploy PHP application and Database on Kubernetes
+  hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Deploy Database
+    community.kubernetes.k8s:
+      kubeconfig: "C:\\Users\\HP\\.kube\\config"
+      state: present
+      src: "db-deployment.yml"
+  
+  - name: Deploy PHP Application
+    community.kubernetes.k8s:
+      kubeconfig: "/path/to/your/kubeconfig"
+      state: present
+      src: "php-deployment.yml"

@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "db-deployment" {
           }
           env {
             name = "MYSQL_ROOT_PASSWORD"
-            value = "root" # Consider using a more secure way to store passwords (e.g., Secrets)
+            value = "root" 
           }
           env {
             name = "MYSQL_DATABASE"

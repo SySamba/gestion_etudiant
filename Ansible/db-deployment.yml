@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Déploiement de la base de données
+      community.kubernetes.k8s:
+        kubeconfig: "C:\\Users\\HP\\.kube\\config"
+        namespace: default
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: db-deployment
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: db
+            template:
+              metadata:
+                labels:
+                  app: db
+              spec:
+                containers:
+                  - name: db
+                    image: papasy/projetbd1
+                    ports:
+                      - containerPort: 3306
+                    env:
+                      - name: MYSQL_ROOT_PASSWORD
+                        value: "root"
+                      - name: MYSQL_DATABASE
+                        value: "gestion_etudiant"
